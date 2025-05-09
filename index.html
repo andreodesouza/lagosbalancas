@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lagos Balanças</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">    
+        <form id="login-form">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input id="email" placeholder="Usuário" type="email" required>
+            </div>
+            <div class="input-box">
+                <input id="password" placeholder="Senha" type="password" required>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox">
+                    Lembrar Minha Senha
+                </label>
+                <a href="#">Esqueci Minha Senha</a>
+            </div>
+            
+            <button type="submit" class="login">Login</button>
+
+            <div class="register-link">
+                <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+            </div>
+        </form>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBzaux8U3qRaKh9ix89rWS-9auR5tyyqOw",
+            authDomain: "onde-tem-d8139.firebaseapp.com",
+            projectId: "onde-tem-d8139",
+            storageBucket: "onde-tem-d8139.firebasestorage.app",
+            messagingSenderId: "161138402160",
+            appId: "1:161138402160:web:8691cd7f4ef0ff11e165b5",
+            measurementId: "G-1MJM03Z2M4"
+        };
+
+        // Inicializa o Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Manipula o evento de submissão do formulário
+        document.getElementById("login-form").addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                alert("Login bem-sucedido! Usuário: " + user.email);
+                // Redirecionar para outra página ou fazer outra ação após login bem-sucedido
+            } catch (error) {
+                alert("Erro ao fazer login: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
