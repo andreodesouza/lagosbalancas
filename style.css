@@ -10,6 +10,7 @@ body{
     align-items: center;
     min-height: 100vh;
     background: url('https://ibb.co/mRpsHxx');
+    background-image: url('./img/img.jpg');
     background-size: cover;
     background-position: center;
 }
